@@ -1,0 +1,4 @@
+https://www.youtube.com/watch?v=uQ6fGtdERlY
+
+摩擦力 Assets -> Create -> Physic Material
+要用Addforce的方式才有摩擦力產生，直接改變座標則無

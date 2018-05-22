@@ -1,0 +1,9 @@
+Addfore和Velocity的差別(https://jerrard-liu.blogspot.tw/2015/10/addforcevelocity.html)
+
+//給物體一個力道、加速方式(預設force)
+rigibody.Addforce(Speed Vector3,ForceMode.XXX);
+
+//對rigibody施力方式
+Vector3 dir = transform.TransformDirection(Vector3.right*20);
+Rigidbody rb = GetComponent<Rigidbody>();
+rb.AddForce(dir);

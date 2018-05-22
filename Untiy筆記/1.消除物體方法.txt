@@ -1,0 +1,10 @@
+讓物體變透明，其本身的碰撞還在
+this.gameObject.GetComponent<Renderer>().enabled = false;
+
+讓物體在此場景內消失，編輯模式依舊看的到
+this.gameObject.SetActive(false);
+有子物件用遞迴的方式
+SetActiveRecursively(false)
+
+完全消除物件
+Destory(gameObject);

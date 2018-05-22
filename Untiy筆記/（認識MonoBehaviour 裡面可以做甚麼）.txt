@@ -1,0 +1,255 @@
+http://cwa1022.pixnet.net/blog/post/9104761-unity3d-%E6%95%99%E5%AD%B83%EF%BC%88%E8%AA%8D%E8%AD%98monobehaviour--%E8%A3%A1%E9%9D%A2%E5%8F%AF%E4%BB%A5%E5%81%9A%E7%94%9A%E9%BA%BC
+
+//当一个脚本实例被载入时Awake被调用。
+    void Awake()
+    {
+        Debug.Log ("Awake");
+    }
+    //Start仅在Update函数第一次被调用前调用。
+    void Start () 
+    {
+        Debug.Log ("Start");
+    }
+    //当MonoBehaviour启用时，其 FixedUpdate 在每一帧被调用。
+    void FixedUpdate()
+    {
+        Debug.Log ("FixedUpdate");
+    }
+    // Update is called once per frame
+    //当MonoBehaviour启用时，其Update在每一帧被调用。
+    void Update () 
+    {
+        Debug.Log ("Update");
+    }
+    //当Behaviour启用时，其LateUpdate在每一帧被调用。
+    void LateUpdate()
+    {
+        Debug.Log ("LateUpdate");
+    }
+    //重置为默认值。
+    void Reset()
+    {
+        Debug.Log ("Reset");
+    }
+    //当鼠标进入到GUIElement(GUI元素)或Collider(碰撞体)中时调用OnMouseEnter。
+    void OnMouseEnter()
+    {
+        Debug.Log ("OnMouseEnter");
+    }
+    //当鼠标悬浮在GUIElement(GUI元素)或Collider(碰撞体)上时调用 OnMouseOver .
+    void OnMouseOver()
+    {
+        Debug.Log ("LateUpdate");
+    }
+    //当鼠标移出GUIElement(GUI元素)或Collider(碰撞体)上时调用OnMouseExit。
+    void OnMouseExit()
+    {
+        Debug.Log ("LateUpdate");
+    }
+    //当鼠标在GUIElement(GUI元素)或Collider(碰撞体)上点击时调用OnMouseDown。
+    void OnMouseDown()
+    {
+        Debug.Log ("OnMouseDown");
+    }
+    //当用户释放鼠标按钮时调用OnMouseUp。
+    void OnMouseUp()
+    {
+        Debug.Log ("OnMouseUp");
+    }
+    //OnMouseUpAsButton只有当鼠标在同一个GUIElement或Collider按下，在释放时调用。
+    void OnMouseUpAsButton()
+    {
+        Debug.Log ("OnMouseUpAsButton");
+    }
+    //当用户鼠标拖拽GUIElement(GUI元素)或Collider(碰撞体)时调用 OnMouseDrag 。
+    void OnMouseDrag()
+    {
+        Debug.Log ("OnMouseDrag");
+    }
+    //当Collider(碰撞体)进入trigger(触发器)时调用OnTriggerEnter。
+    void OnTriggerEnter(Collider other) 
+    {
+        Debug.Log ("OnTriggerEnter");
+    }
+    //当Collider(碰撞体)停止触发trigger(触发器)时调用OnTriggerExit。
+    void OnTriggerExit(Collider other) 
+    {
+        Debug.Log ("LateUpdate");
+    }
+    //当碰撞体接触触发器时，OnTriggerStay将在每一帧被调用。
+    void OnTriggerStay(Collider other) 
+    {
+        Debug.Log ("OnTriggerStay");
+    }
+    //当此collider/rigidbody触发另一个rigidbody/collider时，OnCollisionEnter将被调用。
+    void OnCollisionEnter(Collision collision) 
+    {
+
+        Debug.Log ("OnCollisionEnter");
+    }
+    //当此collider/rigidbody停止触发另一个rigidbody/collider时，OnCollisionExit将被调用。
+    void OnCollisionExit(Collision collision) 
+    {
+        Debug.Log ("OnCollisionExit");
+        
+    }
+    //当此collider/rigidbody触发另一个rigidbody/collider时，OnCollisionStay将会在每一帧被调用。
+    void OnCollisionStay(Collision collision) 
+    {
+        Debug.Log ("OnCollisionStay");
+        
+    }
+    //在移动的时，当controller碰撞到collider时OnControllerColliderHit被调用。
+    void OnControllerColliderHit(ControllerColliderHit hit) 
+    {
+        Debug.Log ("OnControllerColliderHit");
+    }
+    //当附在同一对象上的关节被断开时调用。
+    void OnJointBreak(float breakForce) 
+    {
+        Debug.Log ("OnJointBreak");
+    }
+    //当粒子碰到collider时被调用。
+    void OnParticleCollision(GameObject other)
+    {
+        Debug.Log ("OnParticleCollision");
+    }
+    //当renderer(渲染器)在任何相机上可见时调用OnBecameVisible。
+    void OnBecameVisible() 
+    {
+        Debug.Log ("OnBecameVisible");
+    }
+    //当renderer(渲染器)在任何相机上都不可见时调用OnBecameInvisible。
+    void OnBecameInvisible() 
+    {
+        Debug.Log ("OnBecameInvisible");
+    }
+    //当一个新关卡被载入时此函数被调用。
+    void OnLevelWasLoaded(int level) 
+    {
+        Debug.Log ("OnLevelWasLoaded");
+        
+    }
+    //当对象变为可用或激活状态时此函数被调用。
+    void OnEnable() 
+    {
+        Debug.Log ("OnEnable");
+    }
+    //当对象变为不可用或非激活状态时此函数被调用。
+    void OnDisable() 
+    {
+        Debug.Log ("OnDisable");
+    }
+    //当MonoBehaviour将被销毁时，这个函数被调用。
+    void OnDestroy() 
+    {
+        Debug.Log ("OnDestroy");
+    }
+    //在相机消隐场景之前被调用。
+    /*void OnPreCull() 
+    {
+
+    }*/
+    //在相机渲染场景之前被调用。
+    /*void OnPreRender() 
+    {
+
+    }*/
+    //在相机完成场景渲染之后被调用。
+    /*void OnPostRender() 
+    {
+
+    }*/
+    //在相机场景渲染完成后被调用。
+    /*void OnRenderObject ()
+    {
+
+    }*/
+    //如果对象可见每个相机都会调用它。
+    /*void OnWillRenderObject() 
+    {
+
+    }*/
+    //渲染和处理GUI事件时调用。
+    void OnGUI() 
+    {
+        Debug.Log ("OnGUI");
+
+        
+    }
+    //当完成所有渲染图片后被调用，用来渲染图片后期效果。
+    /*void  OnRenderImage () 
+    {
+        Debug.Log ("OnRenderImage");
+    }*/
+    //如果你想在物体被选中时绘制gizmos，执行这个函数。
+    void OnDrawGizmosSelected() 
+    {
+        Debug.Log ("OnDrawGizmosSelected");
+    }
+    //如果你想绘制可被点选的gizmos，执行这个函数。
+    void OnDrawGizmos() 
+    {
+        Debug.Log ("OnDrawGizmos");
+    }
+    //当玩家暂停时发送到所有的游戏物体。
+    void  OnApplicationPause ()
+    {
+        Debug.Log ("OnApplicationPause");
+    }
+    //当玩家获得或失去焦点时发送给所有游戏物体。
+    void  OnApplicationFocus () 
+    {
+        Debug.Log ("OnApplicationFocus");
+    }
+    //在应用退出之前发送给所有的游戏物体。
+    void OnApplicationQuit ()
+    {
+        Debug.Log ("OnApplicationQuit");
+    }
+    //当一个新玩家成功连接时在服务器上被调用。
+    void OnPlayerConnected(NetworkPlayer player) 
+    {
+        Debug.Log ("LateUpdate");
+    }
+    //当Network.InitializeServer被调用并完成时，在服务器上调用这个函数。
+    void OnServerInitialized() 
+    {
+        Debug.Log("Server initialized and ready");
+    }
+    //当你成功连接到服务器时，在客户端调用。
+    void OnConnectedToServer() 
+    {
+        Debug.Log("Connected to server");
+    }
+    //当一个玩家从服务器上断开时在服务器端调用。
+    void OnPlayerDisconnected(NetworkPlayer player) 
+    {
+        Debug.Log("Clean up after player " + player);
+
+    }
+    //当失去连接或从服务器端断开时在客户端调用。
+    void OnDisconnectedFromServer(NetworkDisconnection info) 
+    {
+        Debug.Log("Disconnected from server: " + info);
+    }
+    //当一个连接因为某些原因失败时在客户端调用。
+    void OnFailedToConnect(NetworkConnectionError error) 
+    {
+        Debug.Log("Could not connect to server: " + error);
+    }
+    //当报告事件来自主服务器时在客户端或服务器端调用。
+    void OnFailedToConnectToMasterServer(NetworkConnectionError info) 
+    {
+        Debug.Log("Could not connect to master server: " + info);
+    }
+    //当一个物体使用Network.Instantiate进行网络初始化时调用。
+    void OnNetworkInstantiate(NetworkMessageInfo info) 
+    {
+        Debug.Log("New object instantiated by " + info.sender);
+    }
+    //在一个网络视图脚本中，用于自定义变量同步。
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) 
+    {
+        Debug.Log ("OnSerializeNetworkView");
+    }

@@ -1,0 +1,7 @@
+http://web-theglory.rhcloud.com/wordpress/unity-2d-%E6%95%99%E5%AD%B808-%E7%A2%B0%E6%92%9E%E4%BA%8B%E4%BB%B6/
+OnCollisionEnter2D – 碰撞事件
+當兩個2D碰撞器碰撞時會發生的事件
+OnCollisionExit2D – 分開事件
+當兩個2D碰撞器碰撞後，分開時所發生的事件
+OnCollisionStay2D – 停滯事件
+當兩個2D碰撞器碰撞後，未分開時會持續發生的事件，也可以想做是接觸著碰撞器

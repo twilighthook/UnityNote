@@ -1,0 +1,51 @@
+51. Material和Physic Material區別？
+
+PhysicMaterial 物理材質：物理材質描述，如何處理物體碰撞（摩擦，彈性）。
+
+Material材質（材質類）為了獲得一個對象使用的材質，可以使用 Renderer.Materials屬性
+
+
+52.
+
+動畫層(Animation Layers)的作用是什麼？
+
+動畫層作為一個具有層級動畫編輯概念的工具，可以用來製作和處理任何類型的動畫
+
+
+53. 請簡述OnBecameVisible及OnBecameInvisible的發生時機，以及他們執行的意義？
+
+當renderer(渲染器)在任何相機上都不可見時調用：OnBecameInvisible
+
+當renderer(渲染器)在任何相機上可見時調用：OnBecameVisible
+
+
+54. 請簡述四元數的作用以及四元數相對於歐拉角的優點
+
+A.四元數一般定義如下：q=w+xi+yj+zk其中 w,x,y,z是實數。同時，有: i*i=-1 j*j=-1 k*k=-1
+
+B.四元數也可以表示為： q=[w,v]
+
+有多種方式可表示旋轉，如 axis/angle、歐拉角(Euler angles)、矩陣(matrix)、四元組等。 相對於其它方法，四元組有其本身的優點：
+
+a.四元數不會有歐拉角存在的 gimbal lock 問題[萬向節死鎖
+
+b.四元數由4個數組成，旋轉矩陣需要9個數
+
+c.兩個四元數之間更容易插值
+
+d.四元數、矩陣在多次運算後會積攢誤差，需要分別對其做規範化(normalize)和正交化 (orthogonalize)，對四元數規範化更容易
+
+e.與旋轉矩陣類似，兩個四元組相乘可表示兩次旋轉
+
+
+55. 說一下您在U3D遊戲中用到的設計模式？
+
+單例
+
+MVC（NGUI的MVC架構：
+
+1. 一個UI Panel（比如背包介面）打成一個預製件-View 封裝
+
+2. 背包數據放在Model裡面
+
+3. 行為控制對應一個Controler腳本

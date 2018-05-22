@@ -1,0 +1,44 @@
+//持續前進移動
+transform.position += transform.forward * move_Speed *Time .deltaTime ;
+
+//直接變換座標
+transform.position = new Vector3(0,0,0);
+transform.position = Vector3.zero;
+
+//持續轉向移動
+transform.Rotate(0,-rotate_Speed * Time .deltaTime ,0);
+Vector3 rot = new Vector3(0, 1, 0);   transform.Rotate (0,1,0);
+
+//直接變換方向
+transform.rotation = Quaternion.Euler(45.0f, 45.0f, 45.0f);
+
+//固定轉的方向
+在rigibody內constraits設置
+
+//移動方式差異
+//指的是往物體的前方移動
+Vector3 dir = transform.TransformDirection(Vector3.forward);
+//指的是往絕對座標的前方移動
+Vector3 dir = Vector3.forward;
+GetComponent<Rigidbody>().AddForce(dir*100);
+
+//相對位置點生成物件
+// 在物體右邊生成
+var thePosition = transform.TransformPoint(Vector3.right * 2);  //絕對位置寫法(在空間座標的右方)
+var thePosition = transform .position + transform .right *2;    //相對位置寫法(在物體右方)
+Instantiate(someObject, thePosition, someObject.transform.rotation);
+
+
+//用Addforce方式移動
+if (Input.GetKey(KeyCode.W)) {
+    rb.AddForce(move_Speed * transform.forward);
+}
+if (Input.GetKey(KeyCode.S)) {
+    rb.AddForce(move_Speed * -transform.forward);
+}
+if (Input.GetKey(KeyCode.A)) {
+    rb.transform.Rotate(0,-rotate_Speed,0);
+}
+if (Input.GetKey(KeyCode.D)) {
+    rb.transform.Rotate(0,rotate_Speed, 0);
+}

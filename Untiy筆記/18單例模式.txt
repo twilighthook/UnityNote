@@ -1,0 +1,4 @@
+單例模式簡介 http://blog.csdn.net/candycat1992/article/details/8252638#t3  
+單例例子 http://blog.csdn.net/candycat1992/article/details/10960731
+
+當一個函式，在整個遊戲只會用到一次時，將他設為單例，只有該需要的系統可以Access他

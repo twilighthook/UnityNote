@@ -1,0 +1,19 @@
+﻿組件是什麼？ Component
+
+Unity3D面向對象編程最大的體現就是組件化，任何一個遊戲對象都是通過附加不同的組件實現。
+例如每一個遊戲對象都具有一個Transform組件。
+
+問題：獲取、增加、刪除組件的命令分別是什麼？
+獲取：GetComponent增加：AddComponent刪除：Destroy
+
+GetComponent用法
+rb = GetComponent<Rigibody>();
+
+AddComponent用法
+gameObject.AddComponent<Rigidbody>();
+
+Destroy用法
+Destroy(GetComponent<Rigibody>());
+
+當AddComponent在Start進行時
+Update若有對其物件操控時，因Update可能會同時進行錯誤，要加一行if(Component != null)

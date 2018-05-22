@@ -1,0 +1,28 @@
+ //rotation
+        float rotController = Input.GetAxis("Mouse X") * rotationSpeed;
+        transform.Rotate(0, rotController, 0);
+
+        verticalRotation -= Input.GetAxis("Mouse Y") * rotationSpeed;
+        //限制verticalRotation範圍
+        verticalRotation = Mathf.Clamp(verticalRotation, -updownRange, updownRange);
+        //用localRotation不然會影響母物件
+        Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation ,0,0);
+
+        //movement
+        if (cc.isGrounded) {
+            forwardSpeed = Input.GetAxis("Vertical") * moveSpeed;
+            sideRotation = Input.GetAxis("Horizontal") * moveSpeed;
+        }
+ 
+        verticalVerlocity += Physics.gravity.y * Time.deltaTime;
+
+        Vector3 speed = new Vector3(sideRotation, verticalVerlocity , forwardSpeed);
+
+        speed = transform .rotation * speed;
+
+        //跳躍判斷，rigibody.isGrounded看是否有著地
+        if (Input.GetButton("Jump") && cc.isGrounded) {
+            verticalVerlocity = jumpHight;
+        }
+
+        cc.Move(speed * Time.deltaTime);

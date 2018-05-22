@@ -1,0 +1,19 @@
+腳本的編譯過程分四步：
+
+１.編譯所有 」Standard Assets」, 「Pro Standard Assets」 or 「Plugins」 目錄下的代碼
+
+２.編譯所有「Standard Assets/Editor」, 「Pro Standard Assets/Editor」 or 「Plugins/Editor」 目錄下的代碼
+
+３.編譯除了上面列出來的目錄和Editor目錄之外的所有代碼
+
+４.編譯Editor目錄下的代碼
+
+問題：如何在C#腳本中調用JS腳本中的方法？
+
+如果你希望某個Javascript能被其他腳本引用，那麼把它放到第一組的某個目錄里，然後把要使用它的代碼放在第三組的某個目錄里就好了。
+
+同樣，如果希望某個C#代碼能被其他Javascript腳本引用，也必須把這個C#腳本放到第一組的某個目錄里，Javascript代碼放到第三組的某個目錄里。
+
+編輯器類存放路徑是什麼？
+
+工程目錄下的Assets/Editor文件夾下

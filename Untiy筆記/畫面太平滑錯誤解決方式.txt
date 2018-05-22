@@ -1,0 +1,1 @@
+把Mesh Collider內部Inflate Mesh打勾，Skin Width就是其Collider畫面精細度

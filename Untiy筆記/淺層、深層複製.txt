@@ -1,0 +1,4 @@
+https://openhome.cc/Gossip/Java/ArrayCopy.html
+
+淺層指的是只複製物件的位址並指向它，會因前者複製體改變
+深層指的是數值完全複製，不會因前者複製體改變

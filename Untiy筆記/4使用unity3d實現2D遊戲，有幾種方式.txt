@@ -1,0 +1,9 @@
+1.使用本身的GUI；
+
+2.把攝像機的Projection(投影)值調為Orthographic(正交投影)，不考慮z軸；
+http://www.cnblogs.com/zhaoqingqing/p/3302484.html
+沒辦法判斷距離
+
+3.使用2d插件，如：2DToolKit、Uni2D；
+
+4.Unity 4.3版本新增的Native 2D（原生）

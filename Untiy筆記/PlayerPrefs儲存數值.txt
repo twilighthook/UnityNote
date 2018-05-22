@@ -1,0 +1,5 @@
+//將fly_highscore，新增並放入hightscore內
+static public int fly_highscore = 0;
+PlayerPrefs.SetInt("hightscore" , fly_highscore );
+//開局時將數值匯入
+fly_highscore = PlayerPrefs.GetInt("hightscore",0);

@@ -1,0 +1,14 @@
+public GameObject Bullet_Item;
+    public float bullet_speed = 100f;
+    Rigidbody rb;
+
+    // Update is called once per frame
+    void FixedUpdate () {
+		if (Input .GetButtonDown("Fire1")) {
+            Camera cam = Camera.main;
+            GameObject thebullet =  (GameObject)Instantiate(Bullet_Item ,cam.transform .position + cam.transform .forward,cam.transform .rotation );
+            rb = thebullet.GetComponent<Rigidbody>();
+			//cam.transform .forward *往面對方向發射
+            rb.AddForce(cam.transform .forward * bullet_speed ,ForceMode.Impulse);
+        }
+	}

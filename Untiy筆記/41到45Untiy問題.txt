@@ -1,0 +1,74 @@
+41. 技能釋放怎麼做？
+
+一般遊戲中的技能都是粒子特效，結合輸入控制粒子特效的播放。
+
+
+42. 有限狀態機
+
+每個對象都維護自己的狀態機，狀態機的狀態改變，靠狀態觸發器。每一個狀態觸發器都包含三個固定函數：Enter、Excute（執行）、Exit（退出）
+
+進入動作（entry action）：在進入狀態時進行
+退出動作：在退出狀態時進行
+輸入動作：依賴於當前狀態和輸入條件進行
+轉移動作：在進行特定轉移時進行
+
+請給我設計一個狀態機，完成一個簡單的xxxx情景。
+
+答：狀態機並不是單純的switch結構，如果你是新手，你說switch我可以容忍，如果你幹了好些年2Dx，然後想自廢武功搞U3d了，再說switch就直接pass了。
+
+FSM
+
+FSMSystem 負責狀態的切換
+
+FSMState 表示各個狀態基類，執行Excute、進入、退出、切換條件ChangeCheck
+
+-Update
+
+可以怪物AI來使用FSM
+
+對比（偽代碼）
+
+Update
+
+If(state1)
+
+{
+
+If(state is 2)
+
+{
+
+//go to state2
+
+}
+
+Excute;
+
+}
+
+If(state2)
+
+{
+
+}
+
+
+43. Unity 連接資料庫
+
+本地數據最常用的是SQLite，需要得到Mono.Data.Sqlite.dll 文件與System.Data.dll文件。
+
+
+44. 本地數據存儲方式？（原創）
+
+文本：xml、json、excel（cvs）
+
+資料庫：SQLite
+
+PlayerPrefes
+
+
+45. 請描述MeshRender中material和shader的區別？
+
+Shader（著色器）實際上就是一小段程序，它負責將輸入的Mesh（網格）以指定的方式和輸入的貼圖或者顏色等組合作用，
+然後輸出。繪圖單元可以依據這個輸出來將圖像繪製到螢幕上。輸入的貼圖或者顏色等，加上對應的Shader，
+以及對Shader的特定的參數設置，將這些內容（Shader及輸入參數）打包存儲在一起，得到的就是一個Material（材質）

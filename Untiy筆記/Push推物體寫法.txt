@@ -1,0 +1,11 @@
+//推東西的寫法  http://web-theglory.rhcloud.com/wordpress/unity-vector3-normalize-%E5%90%91%E9%87%8F%E6%A8%99%E6%BA%96%E5%8C%96/
+private void OnCollisionStay(Collision collision) {
+if(collision.collider.tag == "target") {
+//取得自身物件與目標物件間的向量
+Vector3 angle = target.transform.position - transform.position;
+//標準化
+angle = Vector3.Normalize(angle);
+//將自身推向目標
+rigidbody.AddForce(angle * 700); }}
+
+Vector3.Normalized可以令向量長度變為1.0，因此將只會保留方向，便可利用這個功能去延伸出更多效果出來

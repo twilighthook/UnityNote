@@ -1,0 +1,12 @@
+//當按下時，發動一次
+Input.GetKeyDown(KeyCode.Space)
+
+//當按下時，持續發動
+Input.GetKey(KeyCode.Space)
+
+//取值時會有延遲，因電腦鍵盤會自動延遲第一鍵和後面的間隔
+        switch (Input.inputString) {
+            case "w":
+                transform.position += transform.forward * move_Speed * Time.deltaTime;
+                break;
+        }*/

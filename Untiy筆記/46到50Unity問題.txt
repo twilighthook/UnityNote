@@ -1,0 +1,30 @@
+46. LayerMask.NameToLayer這個方法有什麼作用？
+
+LayerMask的使用是按位操作的，LayerMask.NameToLayer("Players") 返回該Layer的編號。
+
+在射線、攝像機遮罩剔除（Culling Mask）使用
+
+
+47. itween插件的作用是什麼，itween作用於世界坐標還是局部坐標，請列舉出3個其常用方法？
+
+iTween是一個動畫庫，作者創建它的目的就是最小的投入實現最大的產出。讓你做開發更輕鬆，用它可以輕鬆實現各種動畫，晃動，旋轉，移動，褪色，上色，控制音頻等等
+
+方法：a、MoveTo 物體移動 ；b、ColorTo：隨著時間改變對象的顏色組； c、LookTo：隨時間旋轉物體讓其臉部朝向所提供的Vector3或Transform位置。
+
+
+48. 什麼是局部坐標，什麼是世界坐標？
+
+世界坐標是不會變的，一直以世界坐標軸的XYZ為標準。
+
+局部坐標其實就是自身的坐標，會隨著物體的旋轉而變化的。
+
+
+49. 以下哪個函數在遊戲進入新場景後會被馬上調用？
+
+MonoBehaviour.OnLevelWasLoaded
+
+
+50. Mecanim系統中，Body Mask的作用是？
+
+指定身體的某一部分是否參與渲染
+

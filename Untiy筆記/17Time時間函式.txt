@@ -1,0 +1,6 @@
+//Time.timeScale、遊戲暫停
+http://www.xuanyusong.com/archives/2956
+
+Time.timeScale=0時，遊戲暫停
+Time.timeScale=1時，Update、LateUpdate(在所有ScriptUpdate後面再執行)、FixedUpdate都以正常時間執行
+Time.timeScale=2時，Update、LateUpdate都以正常時間執行，FixedUpdate是之前速度的兩倍

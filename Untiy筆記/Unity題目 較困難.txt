@@ -1,0 +1,633 @@
+第一部分
+
+1. 請簡述值類型與引用類型的區別
+
+答：區別：
+
+1.值類型存儲在內存棧中，引用類型數據存儲在內存堆中，而內存單元中存放的是堆中存放的地址。
+
+2.值類型存取快，引用類型存取慢。
+
+3.值類型表示實際數據，引用類型表示指向存儲在內存堆中的數據的指針和引用。
+
+4.棧的內存是自動釋放的，堆內存是.NET中會由GC來自動釋放。
+
+5.值類型繼承自System.ValueType,引用類型繼承自System.Object。
+
+可參考http://www.cnblogs.com/JimmyZhang/archive/2008/01/31/1059383.html
+
+2.C#中所有引用類型的基類是什麼
+
+答：引用類型的基類是System.Object 值類型的基類是System.ValueType
+
+同時，值類型也隱式繼承自System.Object
+
+3.請簡述ArrayList和List<Int>的主要區別
+
+答：ArrayList存在不安全類型『（ArrayList會把所有插入其中的數據都當做Object來處理）
+
+裝箱拆箱的操作（費時）
+
+List是接口，ArrayList是一個實現了該接口的類，可以被實例化。
+
+4.請簡述GC（垃圾回收）產生的原因，並描述如何避免？
+
+答：GC回收堆上的內存
+
+避免：
+
+1）減少new產生對象的次數
+
+2）使用公用的對象（靜態成員）
+
+3）將String換為StringBuilder
+
+5.請描述Interface與抽象類之間的不同
+
+答：抽象類表示該類中可能已經有一些方法的具體定義，但接口就是公公只能定義各個方法的介面 ，不能具體的實現代碼在成員方法中。
+
+類是子類用來繼承的，當父類已經有實際功能的方法時該方法在子類中可以不必實現，直接引用父類的方法，子類也可以重寫該父類的方法。
+
+實現接口的時候必須要實現接口中所有的方法，不能遺漏任何一個。
+
+
+
+6.下列代碼在運行中會產生幾個臨時對象？
+
+答：其實在C#中第一行是會出錯的（Java中倒是可行）。應該這樣初始化：
+
+string b = new string(new char{'a','b','c'});
+
+7.下列代碼在運行中會發生什麼問題？如何避免？
+
+答：會產生運行時錯誤，因為foreach是只讀的。不能一邊遍歷一邊修改。
+
+8.請簡述關鍵字Sealed用在類聲明和函數聲明時的作用
+
+答：類聲明時可防止其他類繼承此類，在方法中聲明則可防止派生類重寫此方法。
+
+9.請簡述private，public，protected，internal的區別
+
+答：
+
+public：對任何類和成員都公開，無限制訪問
+
+private：僅對該類公開
+
+protected：對該類和其派生類公開
+
+internal：只能在包含該類的程序集中訪問該類
+
+protected internal：protected + internal
+
+10.反射的實現原理？
+
+答：審查元數據並收集關於它的類型信息的能力。元數據（編譯以後的最基本數據單元）就是一大堆的表，當編譯程序集或者模塊時，編譯器會創建一個類定義表，一個欄位定義表，和一個方法定義表等，。
+
+參考http://blog.163.com/xuanmingzhiyou@yeah/blog/static/1424776762011612115124188/
+
+
+
+反射個人認為，就是得到程序集中的屬性和方法。
+
+實現步驟：
+
+1,導入using System.Reflection;
+
+2，Assembly.Load("程序集")加載程序集,返回類型是一個Assembly
+
+3， foreach (Type type in assembly.GetTypes)
+
+{
+
+string t = type.Name;
+
+}
+
+得到程序集中所有類的名稱
+
+4,Type type = assembly.GetType("程序集.類名");獲取當前類的類型
+
+5,Activator.CreateInstance(type); 創建此類型實例
+
+6,MethodInfo mInfo = type.GetMethod("方法名");獲取當前方法
+
+7,mInfo.Invoke(null,方法參數);
+
+11. .Net與Mono的關係？
+
+答：Mono官網主頁
+
+Mono is a software platform designed to allow developers to easily create
+
+cross platform applications. Sponsored by Xamarin, Mono is an open source
+
+implementation of Microsoft's .NET Framework based on the ECMA standards for C# and the Common Language Runtime.
+
+mono是.net的一個開源跨平台工具，就類似java虛擬機，java本身不是跨平台語言，但運行在虛擬機上就能夠實現了跨平台。.net只能在windows下運行，mono可以實現跨平台跑，
+
+可以運行於linux，Unix，Mac OS等。
+
+12.簡述Unity3D支持的作為腳本的語言的名稱
+
+答：Unity的腳本語言基於Mono的.Net平台上運行，可以使用.NET庫，這也為XML、資料庫、正則表達式等問題提供了很好的解決方案。
+
+Unity里的腳本都會經過編譯，他們的運行速度也很快。這三種語言實際上的功能和運行速度是一樣的，區別主要體現在語言特性上。
+
+JavaScript：和網頁中常用的JavaScript不一樣，它編譯後的運行速度很快，語法方面也會有不少區別。
+
+C#
+
+Boo：可以看做是Python語言的變種，又糅合了Ruby和C#的特性，它是靜態類型語言
+
+13.Unity3D是否支持寫成多線程程序？如果支持的話需要注意什麼？
+
+答：參考http://www.unitymanual.com/3821.html
+
+僅能從主線程中訪問Unity3D的組件，對象和Unity3D系統調用
+
+支持：如果同時你要處理很多事情或者與Unity的對象互動小可以用thread,否則使用coroutine。
+
+注意：C#中有lock這個關鍵字,以確保只有一個線程可以在特定時間內訪問特定的對象
+
+14.Unity3D的協程和C#線程之間的區別是什麼？
+
+答：http://blog.csdn.net/kongbu0622/article/details/8775037
+
+多線程程序同時運行多個線程 ，而在任一指定時刻只有一個協程在運行，並且這個正在運行的協同程序只在必要時才被掛起。除主線程之外的線程無法訪問Unity3D的對象、組件、方法。
+
+Unity3d沒有多線程的概念，不過unity也給我們提供了StartCoroutine（協同程序）和LoadLevelAsync（異步加載關卡）後台加載場景的方法。 StartCoroutine為什麼叫協同程序呢，所謂協同，就是當你在StartCoroutine的函數體里處理一段代碼時，利用yield語句等待執行結果，這期間不影響主程序的繼續執行，可以協同工作。而LoadLevelAsync則允許你在後台加載新資源和場景，所以再利用協同，你就可以前台用loading條或動畫提示玩家遊戲未卡死，同時後台協同處理加載的事宜asynchronous[e ɪˈ s ɪŋ kr ə n ə s] .synchronous同步。
+
+15.U3D中用於記錄節點空間幾何信息的組件名稱，及其父類名稱
+
+答：Transform 父類是 Component
+
+16.簡述四元數的作用，四元數對歐拉角的優點？
+
+答：四元數用於表示旋轉
+
+相對歐拉角的優點：
+
+1）能進行增量旋轉
+
+2）避免萬向鎖
+
+3）給定方位的表達方式有兩種，互為負（歐拉角有無數種表達方式）
+
+17.向量的點乘、叉乘以及歸一化的意義？
+
+1）點乘描述了兩個向量的相似程度，結果越大兩向量越相似，還可表示投影
+
+2）叉乘得到的向量垂直於原來的兩個向量
+
+3）標準化向量：用在只關係方向，不關心大小的時候
+
+18.矩陣相乘的意義及注意點
+
+用於表示線性變換：旋轉、縮放、投影、平移、仿射
+
+注意矩陣的蠕變：誤差的積累
+
+19.為何大家都在移動設備上尋求U3D原生GUI的替代方案
+
+不美觀，OnGUI很耗費時間，使用不方便 ，DrawCall
+
+20.請簡述如何在不同解析度下保持UI的一致性
+
+NGUI很好的解決了這一點，螢幕解析度的自適應性，原理就是計算出螢幕的寬高比跟原來的預設的螢幕解析度求出一個對比值，然後修改攝像機的size。
+
+原生GUI http://unity3d.9ria.com/?p=2587
+
+NGUI http://blog.csdn.net/mfc11/article/details/17681429
+
+21.為什麼dynamic font在unicode環境下優於static font
+
+Unicode是國際組織制定的可以容納世界上所有文字和符號的字符編碼方案。
+
+使用動態字體時，Unity將不會預先生成一個與所有字體的字符紋理。當需要支持亞洲語言或者較大的字體的時候，若使用正常紋理，則字體的紋理將非常大。
+
+22.Render的作用？描述MeshRender和SkinnedMeshRender的關係與不同
+
+A renderer is what makes an object appear on the screen。
+
+Mesh就是指模型的網格（同名組件是用於調整網格屬性的），MeshFilter一般是用於獲得模型網格的組件，而MeshRender是用於把網格渲染出來的組件，
+
+23.簡述SkinnedMesh的實現原理
+
+
+
+24.在場景中放置多個Camera並同時處於活動狀態會發生什麼？
+
+答：遊戲介面可以看到很多攝像機的混合
+
+25.Prefab的作用？如何在移動環境的設備下恰當地使用它？
+
+答：Prefab在實例化的時候用到，主要用於經常會用到的物體，屬性方便修改
+
+
+
+26.如何銷毀一個UnityEngine.Object及其子類
+
+答：Destory
+
+27.為什麼Unity3D中會發生在組件上出現數據丟失的情況？
+
+答：組件上綁定的對象被刪除了
+
+28.如何安全的在不同工程間安全地遷移asset數據？三種方法
+
+答：
+
+將Assets目錄和Library目錄一起遷移
+
+導出包
+
+用unity自帶的assets Server功能
+
+29.MeshCollider和其他Collider的一個主要不同點？
+
+答：Meshcollider再快也是基於V3頂點~~ 建議還是用boxcollider，boxcollider本身是基於算法，沒有面的概念。
+
+30.當一個細小的高速物體撞向另一個較大的物體時，會出現什麼情況？如何避免？
+
+穿透（碰撞檢測失敗）
+
+
+
+(碰撞體變大，FixedUpdate, 代碼限制)
+
+31.OnEnable、Awake、Start運行時的發生順序？哪些可能在同一個對象周期中反覆的發生？
+
+答：Awake -》OnEnable-》Start
+
+OnEnable在同一周期中可以反覆地發生
+
+
+
+32.請簡述OnBecameVisible及OnBecameInvisible的發生時機，以及這一對回調函數的意義？
+
+答：當物體是否可見切換之時。可以用於只需要在物體可見時才進行的計算。
+
+33.Unity3D如何獲知場景中需要加載的數據？
+
+答：題目是獲取的意思？
+
+Resource.Load
+
+AssetBundle
+
+34.MeshRender中material和sharedmaterial的區別？
+
+修改sharedMaterial將改變所有物體使用這個材質的外觀，並且也改變儲存在工程里的材質設置。
+
+不推薦修改由sharedMaterial返回的材質。如果你想修改渲染器的材質，使用material替代。
+
+第二部分
+
+1.請描述遊戲動畫有哪幾種，以及其原理。
+
+主要有關節動畫、單一網格模型動畫(關鍵幀動畫)、骨骼動畫。
+
+關節動畫把角色分成若干獨立部分，一個部分對應一個網格模型，部分的動畫連接成一個整體的動畫，角色比較靈活Quake2中使用了這種動畫。
+
+單一網絡模型動畫由一個完整的網格模型構成，在動畫序列的關鍵幀里記錄各個頂點的原位置及其改變量，然後插值運算實現動畫效果，角色動畫較真實。
+
+骨骼動畫，廣泛應用的動畫方式，集成了以上兩個方式的優點，骨骼按角色特點組成一定的層次結構，由關節相連，可做相對運動，皮膚作為單一網格蒙在骨骼之外，決定角色的外觀。皮膚網格每一個頂點都會受到骨骼的影響，從而實現完美的動畫。（骨骼動畫是由關節動畫發展而來的，如今基本都使用骨骼動畫來實現角色動畫）
+
+2.alpha blend 工作原理
+
+實際顯示顏色 = 前景顏色*Alpha/255 + 背景顏色*(255-Alpha)/255
+
+3.寫光照計算中的diffuse的計算公式
+
+實際光照強度 I= 環境光(Iambient) + 漫反射光(Idiffuse) + 鏡面高光(Ispecular);
+
+環境光：Iambient= Aintensity* Acolor; (Aintensity表示環境光強度，Acolor表示環境光顏色)
+
+漫反射光：Idiffuse = Dintensity*Dcolor*N.L;
+
+(Dintensity表示漫反射強度，Dcolor表示漫反射光顏色，N為該點的法向量，L為光源向量)
+
+鏡面反射光：Ispecular = Sintensity*Scolor*(R.V)^n;
+
+(Sintensity表示鏡面光照強度，Scolor表示鏡面光顏色，R為光的反射向量，V為觀察者向量，n稱為鏡面光指數)
+
+4.lod是什麼，優缺點是什麼
+
+LOD技術即Levels of Detail的簡稱，意為多細節層次。LOD技術指根據物體模型的節點在顯示環境中所處的位置和重要度，決定物體渲染的資源分配，降低非重要物體的面數和細節度，從而獲得高效率的渲染運算。
+
+優點：可根據距離動態地選擇渲染不同細節的模型
+
+缺點：加重美工的負擔，要準備不同細節的同一模型，同樣的會稍微增加遊戲的容量。
+
+5.兩種陰影判斷的方法工作原理
+
+陰影由兩部分組成：本影與半影
+
+本影：景物表面上那些沒有被光源直接照射的區域（全黑的輪廓分明的區域）
+
+半影：景物表面上那些被某些特定光源直接照射但並非被所有特定光源直接照射的區域（半明半暗區域）
+
+求陰影區域的方法：做兩次消隱過程
+
+一次對每個光源進行消隱，求出對於光源而言不可見的區域L；
+
+一次對視點的位置進行消隱，求出對於視點而言可見的面S；
+
+shadow area= L ∩ S
+
+陰影分為兩種：自身陰影和投射陰影
+
+自身陰影：因物體自身的遮擋而使光線照射不到它上面的某些可見面
+
+工作原理：利用背面剔除的方法求出，即假設視點在點光源的位置。
+
+投射陰影：因不透明物體遮擋光線使得場景中位於該物體後面的物體或區域受不到光照照射而形成的陰影
+
+工作原理：從光源處向物體的所有可見面投射光線，將這些面投影到場景中得到投影面，再將這些投影面與場景中的其他平面求交得出陰影多邊形，保存這些陰影多邊形信息，然後再按視點位置對場景進行相應處理得到所要求的視圖（利用空間換時間，每次只需依據視點位置進行一次陰影計算即可，省去了一次消隱過程）
+
+若是動態光源此方法就無效了。
+
+5.Vertex Shader是什麼？怎麼計算？
+
+頂點著色器是一段執行在GPU上的程序，用來取代fixed pipeline中的transformation和lighting，Vertex Shader主要操作頂點。
+
+Vertex Shader對輸入頂點完成了從local space到homogeneous space（齊次空間）的變換過程，homogeneous space即projection space的下一個space。在這其間共有world transformation, view transformation和projection transformation及lighting幾個過程。
+
+6.MipMap是什麼？作用？
+
+在三維計算機圖形的貼圖渲染中有一個常用的技術被稱為Mipmapping。為了加快渲染速度和減少圖像鋸齒，貼圖被處理成由一系列被預先計算和優化過的圖片組成的文件,這樣的貼圖被稱為 MIP map 或者 mipmap。
+
+7.用u3d實現2d遊戲，有幾種方式？
+
+1.利用引擎自帶的GUI
+
+2.把攝像機設為Orthographic，用面片作為2d元素
+
+3.利用第三方插件：NGUI、2dToolkit
+
+8.u3d中碰撞器和觸發器的區別？
+
+collider碰撞器會有碰撞的效果，IsTrigger = false,可以調用OnCollisionEnter/Stay/Exit函數
+
+trigger觸發器沒有碰撞效果，isTrigger = true,可以調用OnTriggerEnter/stay/exit函數
+
+9.物體發生碰撞的必要條件
+
+物體A必須帶有（collider+rigidbody）或者CharacterController，另一個物體也必須至少帶有collider
+
+10.CharacterController和Rigidbody的區別
+
+Rigidbody具有完全真實物理的特性，而CharacterController可以說是受限的Rigidbody，具有一定的物理效果但不是完全真實的。
+
+11.物體發生碰撞時，有幾個階段，分別對應的函數
+
+三個階段，OnCollisionEnter/Stay/Exit函數
+
+12.u3d中，幾種施加力的方式，描述出來
+
+rigidbody.AddForce/AddForceAtPosition，都是rigidbody的成員函數
+
+13.什麼叫做鏈條關節
+
+Hinge Joint ，他可以模擬兩個物體間用一根鏈條連接在一起的情況，能保持兩個物體在一個固定距離內部相互移動而不產生作用力，但是達到固定距離後就會產生拉力。（簡單說就是彈簧）
+
+14.物體自旋轉使用的函數叫什麼
+
+transform.Rotate
+
+15.物體繞某點旋轉使用函數叫什麼
+
+transform.RotateAround
+
+16.u3d提供了一個用於保存讀取數據的類，（playerPrefs），請列出保存讀取整形數據的函數
+
+PlayerPrefs.SetInt 與 PlayerPrefs.GetInt
+
+17.unity3d提供了幾種光源，分別是什麼
+
+平行光：Directional Light
+
+聚光燈：Spot Light
+
+點光源：Point Light
+
+區域光源：Area Light（只用於烘培）
+
+18.unity3d從喚醒到銷毀有一段生命周期，請列出系統自己調用的幾個重要方法。
+
+Awake –>OnEnable –> Start –> Update –> FixedUpdate –> LateUpdate –> OnGUI –> Reset –> OnDisable –> OnDestroy
+
+19.物理更新一般在哪個系統函數裡？
+
+FixedUpdate，每固定幀繪製時執行一次，和update不同的是FixedUpdate是渲染幀執行，如果你的渲染效率低下的時候FixedUpdate調用次數就會跟著下降。FixedUpdate比較適用於物理引擎的計算，因為是跟每幀渲染有關。Update就比較適合做控制。
+
+20.移動相機動作在哪個函數裡，為什麼在這個函數裡。
+
+LateUpdate,，是在所有update結束後才調，比較適合用於命令腳本的執行。官網上例子是攝像機的跟隨，都是在所有update操作完才跟進攝像機，不然就有可能出現攝像機已經推進了，但是視角里還未有角色的空幀出現。
+
+21.當遊戲中需要頻繁創建一個物體對象時，我們需要怎麼做來節省內存。
+
+做一個pool，遊戲開始時預先實例化足夠的數量，然後用的時候取不用的時候收回
+
+22.一個場景放置多個camera並同時處於活動狀態，會發生什麼
+
+實際看到的畫面由多個camera的畫面組成，由depth、Clear Flag、Culling Mask都會影響最終合成效果。
+
+23.簡述prefab的用處和環境
+
+在遊戲運行時實例化，prefab相當於一個模版，對你已有的素材、腳本、參數做一個默認配置，以便於以後修改，同時prefab打包的內容簡化了導出的操作，便於團隊的交流。
+
+24.如何銷毀一個UnityEngine.Object以及其子類
+
+Destroy
+
+25.為什麼u3d會出現組件上數據丟失的情況
+
+一般是組件上綁定的物體對象被刪除了
+
+26.u3d下如何安全的在不同工程遷移asset數據
+
+方法1，可以把assets目錄和Library目錄一起遷移，
+
+方法2，導出包
+
+方法3，用unity帶的assets server功能
+
+第三部分
+
+1．什麼是渲染管道？
+
+是指在顯示器上為了顯示出圖像而經過的一系列必要操作。 渲染管道中的很多步驟，都要將幾何物體從一個坐標系中變換到另一個坐標系中去。
+
+主要步驟有：
+
+本地坐標->視圖坐標->背面裁剪->光照->裁剪->投影->視圖變換->光柵化。
+
+2．如何優化內存？
+
+有很多種方式，例如
+
+1.壓縮自帶類庫；
+
+2.將暫時不用的以後還需要使用的物體隱藏起來而不是直接Destroy掉；
+
+3.釋放AssetBundle占用的資源；
+
+4.降低模型的片面數，降低模型的骨骼數量，降低貼圖的大小；
+
+5.使用光照貼圖，使用多層次細節(LOD)，使用著色器(Shader)，使用預設(Prefab)。
+
+3、動態加載資源的方式？(有時候也問區別，具體請百度)
+
+1.Resources.Load;
+
+2.AssetBundle
+
+4、什麼是協同程序？
+
+在主線程運行時同時開啟另一段邏輯處理，來協助當前程序的執行。換句話說，開啟協程就是開啟一個線程。可以用來控制運動、序列以及對象的行為。
+
+5、你用過哪些插件？
+
+(最好多熟悉幾個插件，問的時候好回答)
+
+第四部分
+
+1.反向旋轉動畫的方法是什麼？
+
+2.碰撞檢測需要物體具備什麼屬性？
+
+3.用代碼實現第三角色控制器
+
+4.實現吊機吊物體的功能
+
+5.獲取、增加、刪除組件的命令分別是什麼？
+
+獲取：GetComponent
+
+增加：AddComponent
+
+刪除：Destroy
+
+6.Animation.CrossFade命令作用是：(C)
+
+A.動畫放大 B.動畫轉換 C.動畫的淡入為其他動畫
+
+7.Application.loadLevel命令為：(A)
+
+A.加載關卡 B.異步加載關卡 C.加載動作
+
+8.調試記錄到控制台的命令是什麼？
+
+Debug.Log;
+
+9.編輯器類存放路徑是什麼？
+
+工程目錄下的Assets/Editor文件夾下。
+
+10.使用原生GUI創建一個可以拖動的窗口命令是什麼？
+
+GUI.DragWindow;
+
+11.localPosition與Position的使用區別？
+
+localPosition：自身位置，相對於父級的變換的位置。 Position：在世界坐標transform的位置
+
+12.意義連線
+
+Mathf.Round 四捨五入
+
+Mathf.Clamp 限制
+
+Mathf.Lerp 插值
+
+15.怎麼拿到一個對象上腳本的方法
+
+GameObject.GetComponent<>;
+
+16.上機題：用滑鼠實現在場景中拖動物體，用滑鼠滾輪實現縮放(用一個Cube即可)。
+
+17.請簡述向量的點乘，向量的叉乘以及向量歸一化的幾何意義？
+
+點乘的幾何意義是：計算兩個向量之間的夾角，以及在某一方向上的投影；
+
+叉乘的幾何意義是：創建垂直於平面，三角形，或者多邊形的向量；參考：
+
+第五部分
+
+1，在類的構造函數前加上static會報什麼錯?為什麼?
+
+構造函數格式為 public+類名如果加上static會報錯（靜態構造函數不能有訪問修飾符）
+
+原因：靜態構造函數不允許訪問修飾符，也不接受任何參數；
+
+無論創建多少類型的對象，靜態構造函數隻執行一次；
+
+運行庫創建類實例或者首次訪問靜態成員之前，運行庫調用靜態構造函數；
+
+靜態構造函數執行先於任何實例級別的構造函數；
+
+顯然也就無法使用this和base來調用構造函數。
+
+2，C# String類型比stringBuilder類型的優勢是什麼?
+
+如果是處理字符串的話，用string中的方法每次都需要創建一個新的字符串對象並且分配新的內存地址，而stringBuilder是在原來的內存里對字符串進行修改，所以在字符串處理方面還是建議用stringBuilder這樣比較節約內存。但是string 類的方法和功能仍然還是比stringBuilder類要強。
+
+string類由於具有不可變性（即對一個string對象進行任何更改時，其實都是創建另外一個string類的對象），所以當需要頻繁的對一個string類對象進行更改的時候，建議使用StringBuilder類，StringBuilder類的原理是首先在內存中開闢一定大小的內存空間，當對此StringBuilder類對象進行更改時，如果內存空間大小不夠，會對此內存空間進行擴充，而不是重新創建一個對象，這樣如果對一個字符串對象進行頻繁操作的時候，不會造成過多的內存浪費，其實本質上並沒有很大區別，都是用來存儲和操作字符串的，唯一的區別就在於性能上。
+
+String主要用於公共API，通用性好、用途廣泛、讀取性能高、占用內存小。
+
+StringBuilder主要用於拼接String，修改性能好。
+
+不過現在的編譯器已經把 String 的 + 操作優化成 StringBuilder 了，所以一般用String就可以了
+
+String是不可變的，所以天然線程同步。
+
+StringBuilder可變，非線程同步。
+
+http://zhidao.baidu.com/question/240364840.html?qbl=relate_question_0&word=String%C0%E0%D0%CD%B1%C8stringBuilder%C0%E0%D0%CD%B5%C4%D3%C5%CA%C6
+
+3，C# 函數Func(string a, string b)用Lambda表達式怎麼寫?
+
+答：https://msdn.microsoft.com/zh-cn/library/bb397687.aspx
+
+4,數列1,1,2,3,5,8,13...第n位數是多少?用C#遞歸算法實現
+
+通項公式應該是an = a(n-1) + a(n-2)
+
+a3=2=1+1
+
+a4=3=1+1+1
+
+a5=1+1+1+2
+
+a6=1+1+1+2+3
+
+.........
+
+an=1+1+1+2+3+...+(n-2)+(n-3)
+
+=2+(n-2)(n-3)/2 (n>=3) 這是通項公式，至於遞歸？…
+
+
+
+5，一個簡單的遊戲,怪物會走動\攻擊\死亡,遊戲角色會走動,跳躍\攻擊\格擋\死亡,還會接受玩家從輸入端輸入的指令,NPC會走動,他們彼此之間可以互相通信.請畫出以上三種角色的UML圖示.
+
+答：
+
+6，NGUI Button怎樣接受用戶點擊並調用函數,具體方法名稱是什麼
+
+OnClick
+
+主要是在UICamera腳本中用射線判斷點擊的物體並通過SendMessage調用OnClick OnPress等函數，可以說NGUI的按鈕是通過發消息這個方式調用的。
+
+7，怎麼判斷兩個平面是否相交?不能用碰撞體,說出計算方法
+
+答：
+
+https://www.baidu.com/s?wd=怎麼判斷兩個平面是否相交&rsv_spt=1&issp=1&f=3&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=0&rsv_pq=abcac720000083b6&rsv_t=ecdctoXQNURcfX%2FVm8MQdPtiBLttYO4HqJrZ1yNsNcxUqDe6DM4ovlQT4HdHZJMh6guT&inputT=2590&oq=C%23%20lamb&rsv_n=2&bs=c%23%20lambda
+
+8, <憤怒的小鳥>給予初速度以後,怎麼讓小鳥受到重力和空氣阻力的影響而繪製拋物線軌跡,說出具體的計算方法.
+
+Vector3 v代表初速度v'代表現在的速度，假設小鳥是沿的z軸也就是transform.forward方向運動的質量為1，那麼v『=v-new Vector3(0,g*t,f*t)，transform.Translate(v')做的就是拋物線運動（g為重力加速度不要用現實中的需要自己調試，f為阻力也要自己調試設置，t為時間）

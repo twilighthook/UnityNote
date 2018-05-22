@@ -1,0 +1,7 @@
+碰撞體觸發函式
+void OnTriggerEnter(Collider collider 可空白，表示只要碰到trigger) {
+    do something;
+	if (collider.tag == "XX") {若collider.tag等於標籤名稱
+    }
+}
+	

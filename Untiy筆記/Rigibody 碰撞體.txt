@@ -1,0 +1,11 @@
+避免物體之間碰撞
+到Edit->Setting->Physics設定
+
+要使用Rigibody內的函式
+先設一個空rigibody -> Rigidbody rb;
+rb = item.GetComponent<Rigidbody>();
+rb.Addforce(,);
+
+物體碰撞若因速度過快穿過物體
+將Rigibody的Collision Detection改成Continue
+

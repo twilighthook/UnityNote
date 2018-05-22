@@ -1,0 +1,25 @@
+Canva固定位置教學 https://jerrard-liu.blogspot.tw/2015/05/canvas1.html
+
+
+Button Script加入List用法 
+https://docs.unity3d.com/ScriptReference/UI.Button-onClick.html
+https://bolaslien.wordpress.com/2015/03/13/ugui-%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%91%BC%E5%8F%AB-button-onclick-%E6%8C%89%E9%88%95%E4%BA%8B%E4%BB%B6/
+public class Press_Button : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+        Button btn = GetComponent<Button>();
+        btn.onClick.AddListener(delegate {
+            Press(this.gameObject);
+        }
+            );
+
+	}
+
+    void Press(GameObject obj) {
+        Debug.Log("Press");
+    }
+
+}
+
+delegate委派的用法可以使onclick() assign 的 obj 不同

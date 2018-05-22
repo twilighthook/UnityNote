@@ -1,0 +1,10 @@
+    //foreach在5.3版前執行效率較差
+	void Start(){
+        GameObject[] Pipe = GameObject.FindGameObjectsWithTag("Pipes");
+
+        foreach(GameObject Pipes in Pipe){
+            Vector3 pos = Pipes.transform.position;
+            pos.y = Random.Range(pipemin ,pipemax );
+            Pipes.transform.position = pos;
+        }
+    }

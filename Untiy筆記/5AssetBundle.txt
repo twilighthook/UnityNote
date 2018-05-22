@@ -1,0 +1,35 @@
+﻿AssetBundle內存釋放(文長 詳細) http://shanewoker.blogspot.tw/2014/04/unity3d.html
+AssetBundle建立和釋放方法  http://forum.china.unity3d.com/thread-361-1-1.html
+AssetBundle好用的打包工具  https://www.youtube.com/watch?v=Nr2vgrKQx7w&t=470s
+
+AssetBundle的管理總共分為三部分：
+1、AssetBundle文件 -> 原本的.assetbundle文件
+
+2、AssetBundle內存鏡像 -> 從.assetbundle文件拉出來的暫存物件
+刪除方式(只刪除AssetBundle文件的内存镜像) -> AssetBundle1.Unload(false);
+刪除方式(刪除AssetBundle文件的内存镜像連同scene內所有的相關物件) -> AssetBundle1.Unload(true);
+
+3、AssetBundle 內存對象實例 -> 從暫存物件複製到scene的遊戲物件
+刪除方式 -> Destroy(obj);
+
+常見問題：
+舉一個例子說明AssetBundle如何進行內存釋放？
+
+一個常見的錯誤：你從某個AssetBundle里Load了一個prefab並克隆之：obj=Instantiate(AssetBundle1.Load("MyPrefab");
+
+這個prefab比如是個npc。
+然後你不需要他的時候你用了：Destroy(obj);你以為就釋放乾淨了。其實這時候只是釋放了Clone對象，通過Load加載的所有引用、非引用Assets對象全都靜靜靜的躺在內存里。
+這種情況應該在Destroy以後用：AssetBundle1.Unload(true)，徹底釋放乾淨。
+
+如果這個AssetBundle1是要反覆讀取的 不方便Unload，那可以在Destroy以後用：Resources.UnloadUnusedAssets把所有和這個npc有關的Asset都銷毀。
+當然如果這個NPC也是要頻繁創建銷毀的那就應該讓那些Assets呆在內存里以加速遊戲體驗。
+由此可以解釋另一個之前有人提過的話題：為什麼第一次Instantiate一個Prefab的時候都會卡一下，因為在你第一次Instantiate之前，相應的Asset對象還沒有被創建，要加載系統內置的AssetBundle並創建Assets,第一次以後你雖然Destroy了，但Prefab的Assets對象都還在內存里，所以就很快了。
+
+問題：unity3d中如何實現動態資源加載？
+
+使用AssetBundle技術，通過WWW類從伺服器下載AssetBundle資源包，將需要的資源加載到項目中。AssetBundle資源包帶有版本號，用來判斷是否需要更新。
+
+問題：AssetBunlde的優點？
+可以動態加載資源
+可以將資源放在伺服器上，方便版本更新。
+AssetBundle資源的加載和是否可以手動控制，方便資源管理。

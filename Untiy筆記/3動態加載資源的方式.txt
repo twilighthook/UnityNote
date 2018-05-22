@@ -1,0 +1,18 @@
+http://gn02214231.pixnet.net/blog/post/198110914-unity-%E5%8B%95%E6%85%8B%E8%BC%89%E5%85%A5%E7%89%A9%E4%BB%B6---resources
+https://godstamps.blogspot.tw/2012/02/unity-3d-assetbundle.html
+Resources和AssetBundle差異 https://forum.gamer.com.tw/C.php?bsn=60602&snA=613
+AssetBundle介紹 http://dev.twsiyuan.com/2017/04/unity-assetbundles.html
+AssetGraph-好用的AssetBundle打包工具介紹 https://www.youtube.com/watch?v=Nr2vgrKQx7w
+
+Resources可由檔案內的資料夾取得，較吃空間
+AssetBundle和WWW一起使用，可以實現從伺服器上下載資源，並動態加載
+壓縮及加載方法  http://www.xuanyusong.com/archives/2405
+
+//須建立Resources資料夾，再將要生成的物體丟進去
+Object obj_cube = Resources.Load("Cube");
+GameObject gobj_cube = obj_cube as GameObject;
+//上兩行可換成下面
+GameObject gobj_cube = Resources.Load("Cube (1)") as GameObject;
+
+gobj_cube.transform.localScale = new Vector3(1.5f,1.5f,1.5f);
+Instantiate(gobj_cube,transform.position + transform.forward*2,Quaternion.Euler(0,0,0));

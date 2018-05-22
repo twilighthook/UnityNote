@@ -1,0 +1,104 @@
+物理引擎就是在遊戲中模擬真實的物理效果。Unity內置了NVIDIA的Physx物理引擎，
+Physx是目前使用最為廣泛的物理引擎，被很多遊戲大作所採用，
+開發者可以通過物理引擎高效、逼真地模擬剛體碰撞、車輛駕駛、布料、重力等物理效果，使遊戲畫面更加真實而生動。
+
+物理引擎主要包含三個核心內容：
+
+1. Collider是最基本的觸發物理的條件，例如碰撞檢測。基本上，沒有Collider物理系統基本沒有意義(除了重力)；
+
+2. Rigidbody是物體的基本物理屬性設置，當檢測碰撞完之後，就要計算物理效果，而Rigidbody提供計算基本參數。
+
+3. PhysicMaterial則是附加的基本物理參數，是一個物理材質，
+UNITY3D有自帶默認的物理材質的係數（在Edit/Project Settings/Physic下設置），
+它參與碰撞的計算例如反彈效果摩擦效果等。
+
+
+Rigidbody常見施力方式：
+
+1. Addforce 可以用來施力道，會因物理屬性影響
+rb.Addforce(move_Speed * transform.forward);  必須是Vector3
+
+2. AddExplosionForce 添加爆炸力，也可以是吸引力，單一座標對外在施的力
+http://www.ceeger.com/Script/Rigidbody/Rigidbody.AddExplosionForce.html
+rb.AddExplosionForce(force(力道), transform.position(爆炸位置), radius(爆炸半徑), 0(upwardsModifier),forcemode(模式));
+
+3. AddForceAtPosition 添加位置力
+rb.AddForceAtPosition(new Vector3(0,0,100),Vector3.zero);
+從Vector3.zero的位置，施一道Z為100的力
+
+
+兩個Collider產生碰撞的必要條件？
+
+1. 至少要有一個物體具有Rigibody剛體才會觸發OnColliderEnter函數。
+
+2.有碰撞器Collider
+
+
+碰撞器和觸發器的區別？
+
+最大的區別是碰撞器有碰撞效果觸發器沒有；觸發器是一個特殊的碰撞器。
+
+
+Collider有幾種？（三種）
+
+1、Static Collider（靜態碰撞器）：帶有Collider沒有添加Rigidbody的對象，用於靜止物體如地理環境；
+
+2、Rigidbody collider：帶有rigidbody的collider對象，能夠根據物理引擎很好的響應外力和碰撞作用。
+
+3、Kinematic rigidbody collider：帶有rigidbody的collider對象，開啟Is kinematic。
+
+當物體進來OnTriggerEnter觸發，出去時OnTriggerExit觸發。那麼物體在進來後Destory後會如何？
+
+經過測試是：不會調用OnTriggerExit。
+
+
+PhysicMaterial有哪些主要屬性？
+
+dynamicFriction：移動摩擦力，值在0到1之間。
+
+staticFriction：靜止摩擦力，值在0到1之間。
+
+Bounciness：彈力，0值沒有彈力，1-沒有能量損失的反彈。
+
+Character Controller（角色控制器）的特性
+
+角色本身不受Physics影響，需要接受外力作用時，使用OnCharacterColliderHit；
+
+
+使用角色控制器如何防止角色經常卡住？
+
+Skin Width：設置為radius的10%；
+
+Step offset：對於2meter（米）高的Character設為0.1到0.4；
+
+Min move distance設為0即可。
+
+
+Rigidbody常用屬性？
+
+打開Is Kinematic後物體不受物理引擎影響，只受Transform控制；
+
+Freeze Position凍結位置軸向，Freeze Rotation凍結方向軸向，凍結之後的軸向只受Transform控制；
+
+使用Physics時不要使用Transform
+
+
+CharacterController和Rigidbody的區別？
+
+CharacterController自帶膠囊碰撞器，裡面包含有剛體的屬性；
+
+Rigidbody就是剛體，使物體帶有剛體的特徵。
+
+
+什麼是Trigger？
+
+Collider勾選Is Trigger屬性，碰撞器變成觸發器；
+
+在物體發生碰撞的整個過程中，有幾個階段，分別列出對應的函數？
+
+OnCollisionEnter、OnCollisionStay（保持）、OnCollisionExit（退出）
+
+
+什麼叫做鏈條關節？
+
+Hinge Joint，可以模擬兩個物體間用一根鏈條連接在一起的情況，能保持兩個物體在一個固定距離內部相互移動而不產生作用力，但是達到固定距離後就會產生拉力。

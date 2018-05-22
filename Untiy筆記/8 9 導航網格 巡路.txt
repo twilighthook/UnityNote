@@ -1,0 +1,33 @@
+點到地方並行走 https://jerrard-liu.blogspot.tw/2016/07/navmeshmouseclick.html
+點到點位置 https://www.youtube.com/watch?v=rKGq42FMV8c
+
+//讓物件可以拖曳到程式編碼區
+[SerializeField]
+Transform destination;
+
+NavMeshAgent Player_Agent;
+
+// Use this for initialization
+void Start () {
+    //找出NPC
+    Player_Agent = this.GetComponent<NavMeshAgent>();
+    if (Player_Agent != null) {
+        SetDestination();
+    }
+}
+
+private void SetDestination() {
+    if (destination != null) {
+        Vector3 target_Vector = destination.transform.position;
+        //尋路
+        Player_Agent.SetDestination(target_Vector);
+    }
+}
+
+(AI是實時計算的，導航網格是自動計算的。AI可以自己研究算法，比導航網格更方便，導航網格被封裝了。)
+
+首先，A*算法的提出是為了解決遊戲中從A點到目標B點繞過障礙物 尋找最短路徑的問題。
+
+其次，A*算法核心為：啟發式搜索、估值函數、選取最小估值
+
+最後，A*算法有優點也有缺點，它理論上將是時間最優的，但空間增長是指數級別的

@@ -1,0 +1,38 @@
+Lightmapping解釋 http://www.cnblogs.com/MrZivChu/p/light.html
+大量使用Lightmapping 靚影特務：關鍵催化 https://www.youtube.com/watch?v=5axBdIMIoQQ
+Lightmapping用法 https://www.youtube.com/watch?v=OVMnXB0NKfc
+https://read01.com/zh-tw/nayPg3.html#.Wae8B8ig_IU
+
+Lightmapping使用Baked可以讓影子直接出現在物體上
+而不再是Realtime的呈現方式
+即使是光源物件消除，仍有打光效果
+優點：
+1. 使用光照貼圖比使用實時光源渲染要快
+2. 可以降低遊戲內存消耗
+3. 多個物體可以使用同一張光照貼圖
+
+既然两者都能达到差不多的效果，那么究竟他们之间有什么差别呢？
+
+      3dmax烘焙：
+
+                      1、可以使用各种高级渲染器对模型进行烘焙，比如Vray。
+
+                      2、可以烘焙像反射这样的效果。
+
+                      3、因为光影是固定了，所以在引擎里面只能按照在3DMax里面的摆放，不然就会穿帮。所以模型贴图不能在各个不同场景通用。
+
+      unity的LightMapping烘焙：
+
+                      1、设置的参数相对没有3DMax里面高级渲染器丰富。
+
+                      2、只能烘焙光影的追踪效果，不能烘焙反射。
+
+                      3、可以一个模型放在不同场景单独烘焙，模型可以通用。 
+                      4、由于每个场景需要烘焙一组贴图，所以如果场景多了，也会增加贴图数量。
+			
+後期螢幕渲染
+http://www.jianshu.com/p/aa753721ba2c
+
+遮擋剔除
+http://blog.sina.com.cn/s/blog_6ba9a5300102wcx0.html
+http://blog.sina.com.cn/s/blog_409cc4b00100oivo.html
